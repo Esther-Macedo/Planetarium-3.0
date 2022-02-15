@@ -1,19 +1,42 @@
-/* import {
- Controller, Get, Post, Put, Delete
-} from '@nestjs/common';
+import {
+   Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Res,
+  Body,
+  Param,
+, ParseIntPipe } from '@nestjs/common';
+import { CostumerService } from 'src/services/costumer.service';
+import { Response } from 'express';
+import { newUser } from 'src/dtos/user.dto';
+
 
 @Controller('costumer')
 export class CostumerController {
-  @Get('Allcostumers')
-  getAllCostumers() {}
+  constructor(private CostumerService: CostumerService) {}
 
-  @Post()
-  newCostumer() {}
+  @Get('Allcostumers')
+  async getAllCostumers(@Res() res: Response) {
+    const allUsers = await this.CostumerService.getAllUsers();
+    res.json(allUsers);
+  }
+
+  @Post('new')
+  async newCostumer(@Res() res: Response, @Body() user: newUser) {
+    const incomingData = await this.CostumerService.addUser(user);
+    res.json(incomingData);
+  }
 
   @Put()
   modifyCostumer() {}
 
-  @Delete()
-  deleteCostumer() {}
+  @Delete(':id')
+ async deleteCostumer(
+@Param('id', ParseIntPipe) id: number, @Res() res: Response
+) {
+  const deleted = await this.CostumerService.deletUser(id)
+  res.json(deleted)
 }
- */
+}
