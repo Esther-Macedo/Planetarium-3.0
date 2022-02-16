@@ -1,5 +1,5 @@
 import {
-   Controller,
+  Controller,
   Get,
   Post,
   Put,
@@ -7,11 +7,12 @@ import {
   Res,
   Body,
   Param,
-, ParseIntPipe } from '@nestjs/common';
+  ParseIntPipe,
+} from '@nestjs/common';
 import { CostumerService } from 'src/services/costumer.service';
 import { Response } from 'express';
 import { newUser } from 'src/dtos/user.dto';
-
+import { updateuser } from 'src/dtos/update.user.dto';
 
 @Controller('costumer')
 export class CostumerController {
@@ -29,14 +30,22 @@ export class CostumerController {
     res.json(incomingData);
   }
 
-  @Put()
-  modifyCostumer() {}
+  @Put(':id')
+  async modifyCostumer(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+    @Body() userupdate: updateuser,
+  ) {
+    const newdata = await this.CostumerService.updateUser(userupdate, id);
+    res.json(newdata);
+  }
 
   @Delete(':id')
- async deleteCostumer(
-@Param('id', ParseIntPipe) id: number, @Res() res: Response
-) {
-  const deleted = await this.CostumerService.deletUser(id)
-  res.json(deleted)
-}
+  async deleteCostumer(
+    @Param('id', ParseIntPipe) id: number,
+    @Res() res: Response,
+  ) {
+    const deleted = await this.CostumerService.deletUser(id);
+    res.json(deleted);
+  }
 }
