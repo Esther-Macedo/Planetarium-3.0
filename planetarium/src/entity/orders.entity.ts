@@ -12,22 +12,22 @@ import { Product } from './product.entity';
 @Entity()
 export class Orders {
   @PrimaryGeneratedColumn()
-    id: number;
+  id: number;
 
-  @PrimaryColumn()
-    prodId: number;
+  @Column()
+  prodId: number;
 
   @OneToMany(() => Product, (product) => product.orders)
   @JoinColumn({ name: 'prodId' })
-    product: Product;
+  product: Product;
 
-  @PrimaryColumn()
-    costId: number;
+  @Column()
+  costId: number;
 
   @OneToMany(() => User, (costumer) => costumer.orders)
   @JoinColumn({ name: 'costId' })
-    costumer: User;
+  costumer: User;
 
   @Column()
-    askdqtd: number;
+  askdqtd: number;
 }

@@ -4,6 +4,7 @@ import config from '../../ormconfig';
 import { CostumerModule } from './costumers.module';
 import { OrderModule } from './orders.module';
 import { ProductModule } from './products.module';
+import { SpecialModule } from './special.modules';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { ProductModule } from './products.module';
     ProductModule,
     CostumerModule,
     OrderModule,
+    SpecialModule,
   ],
 })
 export class AppModule {}

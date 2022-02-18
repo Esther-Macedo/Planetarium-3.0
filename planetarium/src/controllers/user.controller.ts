@@ -18,7 +18,7 @@ import { updateuser } from 'src/dtos/update.user.dto';
 export class CostumerController {
   constructor(private CostumerService: CostumerService) {}
 
-  @Get('Allcostumers')
+  @Get('all')
   async getAllCostumers(@Res() res: Response) {
     const allUsers = await this.CostumerService.getAllUsers();
     res.json(allUsers);

@@ -17,7 +17,7 @@ import { ProductsService } from '../services/products.service';
 export class ProductsController {
   constructor(private readonly ProductService: ProductsService) {}
 
-  @Get('Allproducts')
+  @Get('all')
   async getAllproducts(@Res() res: Response) {
     try {
       const data = await this.ProductService.getAllProducts();
@@ -28,7 +28,7 @@ export class ProductsController {
     }
   }
 
-  @Post('Addproduct')
+  @Post('new')
   async newproduct(@Res() res: Response, @Body() newProduct: incomingProduct) {
     try {
       const data = await this.ProductService.addProduct(newProduct);

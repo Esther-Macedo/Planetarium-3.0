@@ -17,7 +17,7 @@ import { toDeleteOrder } from 'src/dtos/order.delete.dto';
 export class OrderController {
   constructor(private readonly OrderService: OrderService) {}
 
-  @Get('allorders')
+  @Get('all')
   async getAllorders(@Res() res: Response) {
     try {
       const data = await this.OrderService.getAllOrders();
